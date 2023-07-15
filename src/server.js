@@ -289,7 +289,7 @@ app.delete('/todos/deleteAllTodos', (req, res) => {
     });
 
     if (deletedTodos.length === 0) {
-        res.json({
+        res.status(404).json({
             status: "failure",
             message: 'There are no todo items exist'
         });
