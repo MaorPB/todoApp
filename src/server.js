@@ -146,6 +146,9 @@ app.post('/todos/setTodo', (req, res) => {
                 todoCount: 0
             };
             todoList.push(user);
+        } else {
+            res.status(400).json({error: `Error - check logic in code`});
+            return;
         }
 
     // Create a new todo item
