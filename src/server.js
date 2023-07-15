@@ -123,7 +123,7 @@ app.post('/todos/setTodo', (req, res) => {
 
 
     let user = todoList.find(user => user.userName === userName);
-    let email = todoList.find(user => user.userEmail = userEmail)
+    let email = todoList.find(user => user.userEmail === userEmail)
 
     if (!user && !email) {
         user = {
@@ -136,7 +136,17 @@ app.post('/todos/setTodo', (req, res) => {
     } else if (!user && email) {
         res.status(400).json({error: `This email already taken`});
         return;
-    }
+    } else if (user && !email) {
+            // Username exists, but email does not
+            // Create a new user with the provided email
+            user = {
+                userName,
+                userEmail,
+                todos: [],
+                todoCount: 0
+            };
+            todoList.push(user);
+        }
 
     // Create a new todo item
     const newTodo = {
